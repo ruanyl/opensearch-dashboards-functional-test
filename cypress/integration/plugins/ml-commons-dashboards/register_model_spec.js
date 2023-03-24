@@ -14,15 +14,6 @@ if (Cypress.env('ML_COMMONS_DASHBOARDS_ENABLED')) {
         '{"architectures":["BertModel"],"max_position_embeddings":512,"model_type":"bert","num_attention_heads":12,"num_hidden_layers":6}',
     };
 
-    before(() => {
-      // Disable only_run_on_ml_node to avoid model upload error in case of cluster no ml nodes
-      cy.disableOnlyRunOnMLNode();
-      cy.disableNativeMemoryCircuitBreaker();
-      cy.wait(1000);
-    });
-
-    after(() => {});
-
     it('should display register model form when opening register model page', () => {
       cy.visit(MLC_URL.REGISTER_MODEL);
       cy.get('h1').should('have.text', 'Register model');
