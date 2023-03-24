@@ -15,7 +15,9 @@ if (Cypress.env('ML_COMMONS_DASHBOARDS_ENABLED')) {
     };
 
     function fillForm(modelName) {
-      cy.get('input[name="name"]').type(modelName);
+      if (modelName) {
+        cy.get('input[name="name"]').type(modelName);
+      }
 
       cy.fixture(
         'plugins/ml-commons-dashboards/models/traced_small_model.zip'
@@ -34,22 +36,7 @@ if (Cypress.env('ML_COMMONS_DASHBOARDS_ENABLED')) {
 
     it('should display errors if model name is empty', () => {
       cy.visit(MLC_URL.REGISTER_MODEL);
-      cy.get('input[name="name"]').clear();
-
-      cy.fixture(
-        'plugins/ml-commons-dashboards/models/traced_small_model.zip'
-      ).as('tracedSmallModel');
-      cy.get('input[type="file"]').selectFile('@tracedSmallModel');
-
-      cy.contains('label', 'Model file format')
-        .click()
-        .type('Torchscript(.pt)');
-
-      cy.contains('label', 'Configuration in JSON').type(
-        JSON.stringify(config),
-        { parseSpecialCharSequences: false }
-      );
-
+      fillForm('');
       cy.contains('button', 'Register model').click();
 
       // Field error
