@@ -17,6 +17,7 @@ export const MLC_URL = {
   ROOT: BASE_MLC_PATH + '/',
   OVERVIEW: BASE_MLC_PATH + '/overview',
   REGISTER_MODEL: BASE_MLC_PATH + '/model-registry/register-model',
+  REGISTER_NEW_MODEL: BASE_MLC_PATH + '/model-registry/model-list',
 };
 
 export const MLC_API_BASE = `${BACKEND_BASE_PATH}/_plugins/_ml`;
